@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+class ListNode{
+    public:
+    int data;
+    ListNode* next;
+    ListNode(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+void insertT(ListNode* &head,int data){
+
+    ListNode* n=new ListNode(data);
+    if(head==NULL){
+        head=n;
+        return;
+    }
+    ListNode* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+
+    }
+    temp->next=n;
+}
+void display(ListNode* head){
+    ListNode* temp=head;
+    while(temp !=NULL){
+        cout<<temp->data<<" " <<"->";
+        temp=temp->next;
+    }
+    cout<<"NULL"<<endl;
+}
+
+
+ListNode* oddEvenList(ListNode* head) {
+        if(head==NULL){
+            return head;
+        }
+        ListNode* odd=head;
+        ListNode* even=head->next;
+        ListNode* oddStart=head;
+        ListNode* evenStart=head->next;
+        while(even!=NULL && even->next!=NULL){
+            odd->next=odd->next->next;
+            even->next=odd->next->next;
+            odd=odd->next;
+           
+            even=even->next;
+
+        }
+        odd->next=evenStart;
+        return head;
+}
+
+int main(){
+    ListNode* head=NULL;
+    insertT(head,1);
+    insertT(head,2);
+    insertT(head,3);
+    insertT(head,4);
+    display(head);
+    oddEvenList(head);
+    display(head);
+}
