@@ -1,0 +1,34 @@
+class Solution{
+    ListNode* segregate012(ListNode* head){
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        ListNode* zero=new ListNode(-1);
+        ListNode* zeroptr=zero;
+        ListNode* one=new ListNode(-1);
+        ListNode* oneptr=one;
+        ListNode* two=new ListNode(-1);
+        ListNode* twoptr=two;
+        ListNode* curr=head;
+
+        while(curr!=NULL){
+            if(curr->val==0){
+                zeroptr->next=curr;
+                zeroptr=zeroptr->next;
+            }
+            else if(curr->val==1){
+                oneptr->next=curr;
+                oneptr=oneptr->next;
+
+            }else{
+                twoptr->next=curr;
+                twoptr=twoptr->next;
+            }
+            curr=curr->next;
+        }
+        oneptr->next=two->next;
+        zeroptr->next=one->next;
+        twoptr->next=NULL;
+        return zero->next;
+    }
+}
