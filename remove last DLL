@@ -1,0 +1,33 @@
+class node{
+    int data;
+    node* prev;
+    node* next;
+    node( int data){
+        this->data=data;
+        this->next=NULL;
+        this->prev=NULL;
+    }
+};
+void removeLast(node* head) {
+    node* temp=head;
+    while(temp!=NULL){
+        temp=temp->next;
+    }
+    temp->prev->next=temp->next;
+    if(temp->next!=NULL){
+        temp->next->prev=temp->prev;
+    }delete temp;
+}
+void insertT(node* head, int data){
+    if(head==NULL){
+        addfirstNode(head,data);
+        return;
+    }
+ 
+    node* n=new node(data);
+    node* temp=head;
+    while (temp->next!=NULL){
+        temp=temp->next;
+    }temp->next=n;
+    n->prev=temp;
+}
